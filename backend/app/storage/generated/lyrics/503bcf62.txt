@@ -1,0 +1,20 @@
+
+Write emotional and creative song lyrics about:
+
+uvicorn backend.app.main:app --reload
+
+Make the lyrics meaningful, musical, emotional, and catchy.
+
+Lyrics:
+
+"I think that would be great" --
+"I think that would be great" --
+"I think that would be great" --
+"I think that would be great" --
+"I think that would be great" --
+"I think that would be great" --
+"I think that would be great" --
+"I think that would be great" --
+"I think that would be great" --
+"I think that would be great" --
+"I think that would
