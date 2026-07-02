@@ -9,5 +9,6 @@ app = FastAPI(
 @app.get("/")
 def root():
     return {
-        "message": "Welcome to SoundForge AI Backend"
+        "message": "Welcome to SoundForge AI"
+        
     }
