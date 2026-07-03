@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey, DateTime
 from sqlalchemy.sql import func
-from app.database.db import Base
+from app.database.connection import Base
 
 
 class History(Base):
