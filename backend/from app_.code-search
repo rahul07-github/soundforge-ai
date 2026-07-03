@@ -1,0 +1,12 @@
+# Query: from app.
+
+3 results - 3 files
+
+soundforge-ai\backend\app\models\history.py:
+  3: from backend.app.database.db import Base
+
+soundforge-ai\backend\app\models\song.py:
+  2: from backend.app.database.db import Base
+
+soundforge-ai\backend\app\models\user.py:
+  2: from backend.app.database.db import Base

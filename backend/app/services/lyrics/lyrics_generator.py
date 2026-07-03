@@ -1,3 +1,4 @@
+from backend.app.services.music.cover_generator import generate_cover
 from backend.app.services.lyrics.model_loader import lyrics_model
 from backend.app.services.lyrics.prompt import build_prompt
 from backend.app.services.music.music_generator import generate_music
@@ -38,14 +39,15 @@ def generate_lyrics(user_prompt: str):
 
     # GENERATE MUSIC
     song_path = generate_music(lyrics)
-
+    cover_path = generate_cover(prompt)
     # SAVE METADATA
     metadata = {
-        "id": file_id,
-        "prompt": user_prompt,
-        "lyrics_path": lyrics_path,
-        "song_path": song_path
-    }
+    "id": file_id,
+    "prompt": prompt,
+    "lyrics_path": lyrics_path,
+    "song_path": song_path,
+    "cover_path": cover_path
+}
 
     metadata_path = f"{METADATA_DIR}/{file_id}.json"
 
@@ -53,8 +55,9 @@ def generate_lyrics(user_prompt: str):
         json.dump(metadata, f, indent=4)
 
     return {
-        "lyrics": lyrics,
-        "lyrics_path": lyrics_path,
-        "metadata_path": metadata_path,
-        "song_path": song_path
-    }
+    "lyrics": lyrics,
+    "lyrics_path": lyrics_path,
+    "metadata_path": metadata_path,
+    "song_path": song_path,
+    "cover_path": cover_path
+}
