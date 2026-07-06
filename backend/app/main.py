@@ -8,6 +8,7 @@ from backend.app.models.history import History
 
 from backend.app.api.lyrics import router as lyrics_router
 from backend.app.api.music import router as music_router
+from backend.app.api.video import router as video_router
 
 app = FastAPI(
     title="SoundForge AI API",
@@ -18,6 +19,7 @@ Base.metadata.create_all(bind=engine)
 
 app.include_router(lyrics_router)
 app.include_router(music_router)
+app.include_router(video_router)
 
 @app.get("/")
 def root():
