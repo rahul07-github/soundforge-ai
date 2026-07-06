@@ -3,5 +3,11 @@
     "prompt": "\nWrite emotional and creative song lyrics about:\n\nfriend missing\n\nMake the lyrics meaningful, musical, emotional, and catchy.\n\nLyrics:\n",
     "lyrics_path": "backend/app/storage/generated/lyrics/f5d3a8ac.txt",
     "song_path": "backend/app/storage/generated/songs/4fc11ca5.mp3",
-    "cover_path": "backend/app/storage/generated/covers/aa94d25d.png"
+    "cover_path": "backend/app/storage/generated/covers/aa94d25d.png",
+    "video_path": "D:\\SoundForgeAI\\soundforge-ai\\backend\\app\\storage\\generated\\videos\\video_fe306d67.mp4",
+    "thumbnail_path": "D:\\SoundForgeAI\\soundforge-ai\\backend\\app\\storage\\generated\\thumbnails\\thumbnail_f9e1310c.png",
+    "subtitle_path": "D:\\SoundForgeAI\\soundforge-ai\\backend\\app\\storage\\generated\\subtitles\\f5d3a8ac.srt",
+    "status": "completed",
+    "completion_date": "2026-07-05T23:21:37.836478",
+    "generated_at": "2026-07-06 08:25:32"
 }
