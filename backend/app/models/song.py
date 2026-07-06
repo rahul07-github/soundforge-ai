@@ -1,5 +1,9 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
+<<<<<<< HEAD
 from app.database.connection import Base
+=======
+from backend.app.database.db import Base
+>>>>>>> 98206143fd798188b384dc908535371470f8d1d7
 
 
 class Song(Base):
