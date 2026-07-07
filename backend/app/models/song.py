@@ -1,13 +1,33 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
-from backend.app.database.db import Base
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, DateTime
+from sqlalchemy.sql import func
+
+from app.database.connection import Base 
+from sqlalchemy.orm import relationship
 
 
 class Song(Base):
     __tablename__ = "songs"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String(255), nullable=False)
-    artist = Column(String(255), nullable=False)
-    genre = Column(String(100))
-    file_url = Column(String(500))
-    user_id = Column(Integer, ForeignKey("users.id"))
+
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+
+    prompt = Column(Text, nullable=False)
+
+    lyrics = Column(Text, nullable=True)
+
+    audio_url = Column(String(500), nullable=True)
+
+    status = Column(String(50), default="pending")
+
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now()
+    )
+
+
+    user = relationship("User", back_populates="songs") 
+    history = relationship(
+    "History",
+    back_populates="song"
+)

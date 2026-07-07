@@ -1,20 +1,19 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class SongCreate(BaseModel):
-    title: str
-    artist: str
-    genre: str
-    file_url: str
+    prompt: str
 
 
 class SongResponse(BaseModel):
     id: int
-    title: str
-    artist: str
-    genre: str
-    file_url: str
     user_id: int
+    prompt: str
+    lyrics: str | None = None
+    audio_url: str | None = None
+    status: str
+    created_at: datetime
 
     class Config:
         from_attributes = True
