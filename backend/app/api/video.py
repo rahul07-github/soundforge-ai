@@ -7,6 +7,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 import json
 from pathlib import Path
+from typing import Optional
 
 from backend.app.services.video.pipeline import VideoPipeline
 from backend.app.utils.logger import log_info, log_error
@@ -30,7 +31,7 @@ class VideoResponse(BaseModel):
     song_id: str
     video_path: str
     thumbnail_path: str
-    subtitle_path: str
+    subtitle_path: Optional[str]=None
 
 # Create Pipeline ------
 pipeline = VideoPipeline()
@@ -56,7 +57,9 @@ def generate_video(request: VideoRequest):
 
             thumbnail_path=result["thumbnail_path"],
 
-            subtitle_path=result["subtitle_path"]
+            subtitle_path=result["subtitle_path"] if result.get("subtitle_path") else None
+
+          #  subtitle_path=result["subtitle_path"]
         )
 
     except Exception as e:
