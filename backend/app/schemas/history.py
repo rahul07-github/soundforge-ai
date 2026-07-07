@@ -7,6 +7,7 @@ class HistoryResponse(BaseModel):
     user_id: int
     song_id: int
     created_at: datetime
+    action: str
 
     class Config:
         from_attributes = True
