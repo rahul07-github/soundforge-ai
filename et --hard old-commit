@@ -1,0 +1,72 @@
+[33m0fca6d8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/ai-lyrics[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mai-lyrics[m[33m)[m HEAD@{0}: checkout: moving from ai-lyrics to main
+[33m0fca6d8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/ai-lyrics[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mai-lyrics[m[33m)[m HEAD@{1}: checkout: moving from main to ai-lyrics
+[33m0fca6d8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/ai-lyrics[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mai-lyrics[m[33m)[m HEAD@{2}: rebase (finish): returning to refs/heads/main
+[33m0fca6d8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/ai-lyrics[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mai-lyrics[m[33m)[m HEAD@{3}: rebase (continue): Ignore generated audio files
+[33mcc334c1[m HEAD@{4}: commit (amend): beat set
+[33mf14f237[m HEAD@{5}: checkout: moving from b6f522a8800c2981001cab90f1b74334a5fed9e6 to ai-lyrics
+[33mb6f522a[m HEAD@{6}: pull origin main --rebase (start): checkout b6f522a8800c2981001cab90f1b74334a5fed9e6
+[33m61b7ecc[m HEAD@{7}: commit: Ignore generated audio files
+[33mf14f237[m HEAD@{8}: merge ai-lyrics: Fast-forward
+[33m9820614[m HEAD@{9}: checkout: moving from ai-lyrics to main
+[33mf14f237[m HEAD@{10}: commit: beat set
+[33m9820614[m HEAD@{11}: checkout: moving from ai-lyrics to ai-lyrics
+[33m9820614[m HEAD@{12}: checkout: moving from main to ai-lyrics
+[33m9820614[m HEAD@{13}: merge ai-lyrics: Fast-forward
+[33mb1e803d[m HEAD@{14}: checkout: moving from ai-lyrics to main
+[33m9820614[m HEAD@{15}: commit: cover path add
+[33mb1e803d[m HEAD@{16}: merge main: Fast-forward
+[33m165dcb9[m HEAD@{17}: checkout: moving from main to ai-lyrics
+[33mb1e803d[m HEAD@{18}: commit: Resolved merge conflict in main.py
+[33m0192f89[m HEAD@{19}: commit (merge): Merge branch 'ai-lyrics'
+[33m07be606[m HEAD@{20}: checkout: moving from ai-lyrics to main
+[33m165dcb9[m HEAD@{21}: checkout: moving from main to ai-lyrics
+[33m07be606[m HEAD@{22}: commit: update sone file
+[33mc46d774[m HEAD@{23}: rebase (finish): returning to refs/heads/main
+[33mc46d774[m HEAD@{24}: commit: Finished merge
+[33m45e9daa[m HEAD@{25}: pull origin main --rebase (start): checkout 45e9daa631b37a4891285f2f9e991e9fb6f54e17
+[33ma3287b9[m HEAD@{26}: commit (merge): Completed merge from remote main
+[33m0bfbac1[m HEAD@{27}: commit (merge): Added songs API for Rahul video module
+[33m459b64c[m HEAD@{28}: checkout: moving from ai-lyrics to main
+[33m165dcb9[m HEAD@{29}: commit: music,py update
+[33mb9b4cd4[m HEAD@{30}: checkout: moving from main to ai-lyrics
+[33m459b64c[m HEAD@{31}: checkout: moving from ai-lyrics to main
+[33mb9b4cd4[m HEAD@{32}: checkout: moving from main to ai-lyrics
+[33m459b64c[m HEAD@{33}: pull origin main: Fast-forward
+[33mb76033d[m HEAD@{34}: checkout: moving from ai-lyrics to main
+[33mb9b4cd4[m HEAD@{35}: checkout: moving from ai-video to ai-lyrics
+[33m8f9a61c[m[33m ([m[1;31morigin/ai-video[m[33m, [m[1;32mai-video[m[33m)[m HEAD@{36}: checkout: moving from ai-lyrics to ai-video
+[33mb9b4cd4[m HEAD@{37}: checkout: moving from main to ai-lyrics
+[33mb76033d[m HEAD@{38}: pull origin main: Merge made by the 'ort' strategy.
+[33mba525fa[m HEAD@{39}: checkout: moving from main to main
+[33mba525fa[m HEAD@{40}: commit (merge): Resolved merge conflict in main.py
+[33maa5c3e5[m HEAD@{41}: rebase (finish): returning to refs/heads/main
+[33maa5c3e5[m HEAD@{42}: commit: setup ai-lyrics and music
+[33m57fbbaa[m HEAD@{43}: pull origin main --rebase (start): checkout 57fbbaa839f4b509f951e746d64d6848d7cead13
+[33mb9b4cd4[m HEAD@{44}: merge ai-lyrics: Fast-forward
+[33m9384e36[m HEAD@{45}: checkout: moving from ai-lyrics to main
+[33mb9b4cd4[m HEAD@{46}: checkout: moving from ai-lyrics to ai-lyrics
+[33mb9b4cd4[m HEAD@{47}: checkout: moving from ai-lyrics to ai-lyrics
+[33mb9b4cd4[m HEAD@{48}: checkout: moving from main to ai-lyrics
+[33m9384e36[m HEAD@{49}: checkout: moving from ai-lyrics to main
+[33mb9b4cd4[m HEAD@{50}: commit: Added lyrics and music generation with wav output
+[33m9384e36[m HEAD@{51}: merge main: Fast-forward
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{52}: checkout: moving from main to ai-lyrics
+[33m9384e36[m HEAD@{53}: checkout: moving from ai-lyrics to main
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{54}: checkout: moving from ai-lyrics to ai-lyrics
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{55}: checkout: moving from ai-lyrics to ai-lyrics
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{56}: checkout: moving from main to ai-lyrics
+[33m9384e36[m HEAD@{57}: checkout: moving from ai-lyrics to main
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{58}: checkout: moving from main to ai-lyrics
+[33m9384e36[m HEAD@{59}: pull origin main: Fast-forward
+[33m8f9a61c[m[33m ([m[1;31morigin/ai-video[m[33m, [m[1;32mai-video[m[33m)[m HEAD@{60}: checkout: moving from ai-lyrics to main
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{61}: checkout: moving from ai-video to ai-lyrics
+[33m8f9a61c[m[33m ([m[1;31morigin/ai-video[m[33m, [m[1;32mai-video[m[33m)[m HEAD@{62}: checkout: moving from backend-core to ai-video
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{63}: checkout: moving from ai-lyrics to backend-core
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{64}: checkout: moving from ai-video to ai-lyrics
+[33m8f9a61c[m[33m ([m[1;31morigin/ai-video[m[33m, [m[1;32mai-video[m[33m)[m HEAD@{65}: checkout: moving from backend-core to ai-video
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{66}: checkout: moving from ai-lyrics to backend-core
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{67}: checkout: moving from main to ai-lyrics
+[33m8f9a61c[m[33m ([m[1;31morigin/ai-video[m[33m, [m[1;32mai-video[m[33m)[m HEAD@{68}: checkout: moving from ai-lyrics to main
+[33mfa229e8[m[33m ([m[1;31morigin/backend-core[m[33m, [m[1;32mbackend-core[m[33m)[m HEAD@{69}: pull origin main: Fast-forward
+[33m8f9a61c[m[33m ([m[1;31morigin/ai-video[m[33m, [m[1;32mai-video[m[33m)[m HEAD@{70}: checkout: moving from main to ai-lyrics
+[33m8f9a61c[m[33m ([m[1;31morigin/ai-video[m[33m, [m[1;32mai-video[m[33m)[m HEAD@{71}: clone: from https://github.com/rahul07-github/soundforge-ai.git
