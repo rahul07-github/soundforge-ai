@@ -1,18 +1,20 @@
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
 
+from app.auth.jwt_handler import verify_access_token
 from app.database.connection import get_db
 from app.models.user import User
-from app.auth.jwt_handler import verify_access_token
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/login")
+security = HTTPBearer()
 
 
 def get_current_user(
-    token: str = Depends(oauth2_scheme),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
 ):
+    token = credentials.credentials
+
     payload = verify_access_token(token)
 
     if payload is None:
@@ -37,6 +39,4 @@ def get_current_user(
             detail="User not found"
         )
 
-    return user 
-
-
+    return user
