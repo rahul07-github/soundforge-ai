@@ -1,4 +1,14 @@
-.venv/
-venv/
+# Python
 __pycache__/
 *.pyc
+.venv/
+.env
+
+# Models
+models/
+
+# Generated files
+backend/app/storage/generated/
+
+# Database
+*.db
