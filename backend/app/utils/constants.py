@@ -96,3 +96,11 @@ DEFAULT_FRAME_DURATION = 0.5
 DEFAULT_TRANSITION = "fade"
 
 DEFAULT_QUALITY = "high"
+
+
+
+## ==========================================
+
+# features Flags 
+
+ENABLES_SUBTITLES = False
