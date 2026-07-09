@@ -5,6 +5,7 @@ from app.database.connection import Base, engine
 from app.models.user import User
 from app.models.song import Song
 from app.models.history import History
+from app.models.subscription import Subscription
 
 from app.api.user import router as user_router
 from app.api.history import router as history_router
