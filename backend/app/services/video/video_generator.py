@@ -4,11 +4,18 @@ Project : SoundForge AI
 Module : Video Generator
 
 Description:
+<<<<<<< HEAD
 Generate smooth cinematic silent videos using MoviePy.
 """
 
 import random
 import math
+=======
+Creates a silent cinematic video from processed frames.
+"""
+
+import random
+>>>>>>> origin
 
 from moviepy.editor import (
     ImageClip,
@@ -27,6 +34,7 @@ from backend.app.utils.file_manager import create_directory
 
 class VideoGenerator:
     """
+<<<<<<< HEAD
     Professional Video Generator
     """
 
@@ -361,10 +369,19 @@ class VideoGenerator:
         return clip
     
 
+=======
+    Generate silent cinematic video.
+    """
+
+    def __init__(self):
+        log_info("VideoGenerator initialized.")
+
+>>>>>>> origin
     def generate_video(self, processed_frames: list) -> str:
 
         try:
 
+<<<<<<< HEAD
             log_info("Generating cinematic silent video...")
 
             clips = []
@@ -446,6 +463,140 @@ class VideoGenerator:
             ####################################################
             # Merge All Clips
             ####################################################
+=======
+            log_info("Generating silent video.")
+
+            fps = 30
+            transition = 0.40
+
+            timeline = 0
+            clips = []
+
+            camera_effects = [
+                "zoom_in",
+                "zoom_out",
+                "pan_left",
+                "pan_right",
+                "pan_up",
+                "pan_down"
+            ]
+
+            ##################################################
+            # Create Animated Clips
+            ##################################################
+
+            for frame in processed_frames:
+
+                image = frame["image"]
+
+                duration = max(
+                    frame["duration"],
+                    0.30
+                )
+
+                effect = random.choice(
+                    camera_effects
+                )
+
+                clip = (
+                    ImageClip(image)
+                    .set_duration(duration)
+                    .resize(
+                        (
+                            VIDEO_WIDTH,
+                            VIDEO_HEIGHT
+                        )
+                    )
+                )
+
+                ##################################################
+                # Camera Motion
+                ##################################################
+
+                if effect == "zoom_in":
+
+                    clip = clip.resize(
+                        lambda t:
+                        1 + 0.12 * (t / duration)
+                    )
+
+                elif effect == "zoom_out":
+
+                    clip = clip.resize(
+                        lambda t:
+                        1.12 - 0.12 * (t / duration)
+                    )
+
+                elif effect == "pan_left":
+
+                    clip = (
+                        clip
+                        .resize(1.08)
+                        .set_position(
+                            lambda t: (
+                                -120 * t / duration,
+                                "center"
+                            )
+                        )
+                    )
+
+                elif effect == "pan_right":
+
+                    clip = (
+                        clip
+                        .resize(1.08)
+                        .set_position(
+                            lambda t: (
+                                120 * t / duration,
+                                "center"
+                            )
+                        )
+                    )
+
+                elif effect == "pan_up":
+
+                    clip = (
+                        clip
+                        .resize(1.08)
+                        .set_position(
+                            lambda t: (
+                                "center",
+                                -80 * t / duration
+                            )
+                        )
+                    )
+
+                elif effect == "pan_down":
+
+                    clip = (
+                        clip
+                        .resize(1.08)
+                        .set_position(
+                            lambda t: (
+                                "center",
+                                80 * t / duration
+                            )
+                        )
+                    )
+
+                ##################################################
+                # Timeline
+                ##################################################
+
+                clip = (
+                    clip
+                    .set_start(timeline)
+                    .crossfadein(transition)
+                )
+
+                timeline += duration - transition
+
+                clips.append(clip)
+
+            ##################################################
+            # Composite Video
+            ##################################################
+>>>>>>> origin
 
             final_clip = CompositeVideoClip(
                 clips,
@@ -456,6 +607,7 @@ class VideoGenerator:
             )
 
             final_clip = final_clip.set_duration(
+<<<<<<< HEAD
                 timeline +
                 self.transition_duration
             )
@@ -500,4 +652,46 @@ class VideoGenerator:
             log_error(
                 f"Video Generation Failed : {error}"
             )
+=======
+                timeline + duration
+            )
+
+            ##################################################
+            # Output Path
+            ##################################################
+
+            create_directory(TEMP_FOLDER)
+
+            filename = build_output_filename(
+                "temp_video",
+                "mp4"
+            )
+
+            output_path = TEMP_FOLDER / filename
+
+            ##################################################
+            # Export
+            ##################################################
+
+            final_clip.write_videofile(
+                str(output_path),
+                codec="libx264",
+                fps=fps,
+                audio=False,
+                logger=None
+            )
+
+            log_info(
+                f"Silent video created : {output_path}"
+            )
+
+            return str(output_path)
+
+        except Exception as error:
+
+            log_error(
+                f"Video Generation Failed : {error}"
+            )
+
+>>>>>>> origin
             raise

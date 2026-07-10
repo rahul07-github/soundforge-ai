@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 Project : SoundForge AI
 
@@ -9,12 +10,19 @@ Generate intelligent frame timeline from beat detection.
 
 import math
 import random
+=======
+
+# Module : Smart Frame Generator
+
+import math
+>>>>>>> origin
 
 from backend.app.utils.logger import log_info, log_error
 
 
 class FrameGenerator:
     """
+<<<<<<< HEAD
     Generate smart cinematic frame timings.
     """
 
@@ -51,20 +59,34 @@ class FrameGenerator:
 
         ]
 
+=======
+    Generate smart frame timings.
+    """
+
+    def __init__(self):
+        log_info("FrameGenerator initialized.")
+
+>>>>>>> origin
     def generate_frames(self, beat_data: dict) -> list:
 
         try:
 
             beat_times = beat_data["beat_times"]
+<<<<<<< HEAD
             tempo = beat_data["tempo"]
 
             if len(beat_times) < 2:
 
+=======
+
+            if len(beat_times) < 2:
+>>>>>>> origin
                 raise Exception(
                     "Not enough beats detected."
                 )
 
             ###################################################
+<<<<<<< HEAD
             # Dynamic scene duration based on BPM
             ###################################################
 
@@ -88,11 +110,21 @@ class FrameGenerator:
 
             ###################################################
             # Total scenes
+=======
+            # Configuration
+            ###################################################
+
+            SCENE_DURATION = 2.5
+
+            ###################################################
+            # Audio Duration
+>>>>>>> origin
             ###################################################
 
             total_duration = beat_times[-1]
 
             total_scenes = max(
+<<<<<<< HEAD
 
                 1,
 
@@ -114,6 +146,23 @@ class FrameGenerator:
 
             ###################################################
             # Generate timeline
+=======
+                1,
+                math.ceil(total_duration / SCENE_DURATION)
+            )
+
+            ###################################################
+            # Beats Per Scene
+            ###################################################
+
+            beats_per_scene = max(
+                1,
+                math.ceil(len(beat_times) / total_scenes)
+            )
+
+            ###################################################
+            # Create Scene Frames
+>>>>>>> origin
             ###################################################
 
             frames = []
@@ -121,6 +170,7 @@ class FrameGenerator:
             frame_id = 1
 
             for index in range(
+<<<<<<< HEAD
 
                 0,
 
@@ -128,6 +178,11 @@ class FrameGenerator:
 
                 beats_per_scene
 
+=======
+                0,
+                len(beat_times),
+                beats_per_scene
+>>>>>>> origin
             ):
 
                 start_time = beat_times[index]
@@ -144,6 +199,7 @@ class FrameGenerator:
 
                 duration = end_time - start_time
 
+<<<<<<< HEAD
                 ###################################################
                 # Merge very short scenes
                 ###################################################
@@ -222,11 +278,21 @@ class FrameGenerator:
 
                     }
 
+=======
+                frames.append(
+                    {
+                        "frame_id": frame_id,
+                        "start_time": start_time,
+                        "end_time": end_time,
+                        "duration": duration
+                    }
+>>>>>>> origin
                 )
 
                 frame_id += 1
 
             ###################################################
+<<<<<<< HEAD
             # Logging
             ###################################################
 
@@ -240,6 +306,11 @@ class FrameGenerator:
 
                 f"Audio={total_duration:.2f}s"
 
+=======
+
+            log_info(
+                f"{len(frames)} smart frames generated."
+>>>>>>> origin
             )
 
             return frames
@@ -247,9 +318,13 @@ class FrameGenerator:
         except Exception as error:
 
             log_error(
+<<<<<<< HEAD
 
                 f"Frame Generation Failed : {error}"
 
+=======
+                f"Frame Generation Failed : {error}"
+>>>>>>> origin
             )
 
             raise

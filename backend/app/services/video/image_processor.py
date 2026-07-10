@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 Project : SoundForge AI
 
@@ -8,18 +9,27 @@ Professional cinematic image processing for AI Music Video Generation.
 """
 
 import random
+=======
+##   ==== 
+
+>>>>>>> origin
 import cv2
 import numpy as np
 
 from backend.app.utils.logger import log_info, log_error
+<<<<<<< HEAD
 from backend.app.utils.constants import (
     VIDEO_WIDTH,
     VIDEO_HEIGHT
 )
+=======
+from backend.app.utils.constants import VIDEO_WIDTH, VIDEO_HEIGHT
+>>>>>>> origin
 
 
 class ImageProcessor:
     """
+<<<<<<< HEAD
     Professional Image Processor
     """
 
@@ -56,6 +66,117 @@ class ImageProcessor:
 
         x = (new_w - VIDEO_WIDTH) // 2
         y = (new_h - VIDEO_HEIGHT) // 2
+=======
+    Image processing for AI Video Generation.
+    """
+
+    def __init__(self):
+        log_info("ImageProcessor initialized.")
+    
+    def apply_ken_burns(
+        self,
+        image,
+        frame_index: int
+    ):
+        """
+        Apply Ken Burns Effect
+        (Zoom + Pan).
+        """
+
+        height, width = image.shape[:2]
+
+        #################################################
+        # Zoom
+        #################################################
+
+        zoom = 1.10
+
+        resized = cv2.resize(
+            image,
+            None,
+            fx=zoom,
+            fy=zoom
+        )
+
+        new_height, new_width = resized.shape[:2]
+
+        #################################################
+        # Pan Direction
+        #################################################
+
+        mode = frame_index % 4
+
+        if mode == 0:
+
+            # Left → Right
+
+            start_x = 0
+            start_y = (new_height - height) // 2
+
+        elif mode == 1:
+
+            # Right → Left
+
+            start_x = new_width - width
+            start_y = (new_height - height) // 2
+
+        elif mode == 2:
+
+            # Top → Bottom
+
+            start_x = (new_width - width) // 2
+            start_y = 0
+
+        else:
+
+            # Bottom → Top
+
+            start_x = (new_width - width) // 2
+            start_y = new_height - height
+
+        #################################################
+        # Crop
+        #################################################
+
+        cropped = resized[
+            start_y:start_y + height,
+            start_x:start_x + width
+        ]
+
+        return cropped
+
+    def resize_and_crop(self, image):
+        """
+        Resize image while maintaining aspect ratio
+        and crop center.
+        """
+
+        height, width = image.shape[:2]
+
+        target_ratio = VIDEO_WIDTH / VIDEO_HEIGHT
+        image_ratio = width / height
+
+        if image_ratio > target_ratio:
+
+            new_height = VIDEO_HEIGHT
+            new_width = int(new_height * image_ratio)
+
+        else:
+
+            new_width = VIDEO_WIDTH
+            new_height = int(new_width / image_ratio)
+
+        image = cv2.resize(
+            image,
+            (
+                new_width,
+                new_height
+            )
+        )
+
+        x = (new_width - VIDEO_WIDTH) // 2
+        y = (new_height - VIDEO_HEIGHT) // 2
+>>>>>>> origin
 
         image = image[
             y:y + VIDEO_HEIGHT,
@@ -63,6 +184,7 @@ class ImageProcessor:
         ]
 
         return image
+<<<<<<< HEAD
 
     ###########################################################
     # Portrait Background Blur
@@ -73,17 +195,36 @@ class ImageProcessor:
         background = cv2.resize(
             image,
             (VIDEO_WIDTH, VIDEO_HEIGHT)
+=======
+    
+    def blur_background(self, image):
+        """
+        Create blurred background for portrait images.
+        """
+
+        background = cv2.resize(
+            image,
+            (
+                VIDEO_WIDTH,
+                VIDEO_HEIGHT
+            )
+>>>>>>> origin
         )
 
         background = cv2.GaussianBlur(
             background,
+<<<<<<< HEAD
             (81, 81),
+=======
+            (51, 51),
+>>>>>>> origin
             0
         )
 
         return background
     
 
+<<<<<<< HEAD
     ############################################################
     # Color Grading
     ############################################################
@@ -167,6 +308,12 @@ class ImageProcessor:
     ###########################################################
 
     def fit_portrait(self, image):
+=======
+    def fit_portrait(self, image):
+        """
+        Place portrait image over blurred background.
+        """
+>>>>>>> origin
 
         background = self.blur_background(image)
 
@@ -178,13 +325,23 @@ class ImageProcessor:
         )
 
         new_w = int(w * scale)
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
         new_h = int(h * scale)
 
         foreground = cv2.resize(
             image,
+<<<<<<< HEAD
             (new_w, new_h),
             interpolation=cv2.INTER_LINEAR
+=======
+            (
+                new_w,
+                new_h
+            )
+>>>>>>> origin
         )
 
         x = (VIDEO_WIDTH - new_w) // 2
@@ -197,6 +354,7 @@ class ImageProcessor:
 
         return background
 
+<<<<<<< HEAD
     ###########################################################
     # Brightness
     ###########################################################
@@ -425,12 +583,23 @@ class ImageProcessor:
 
         """
         Process all scheduled images into cinematic frames.
+=======
+    def process_images(
+        self,
+        frames: list,
+        scene_images: list
+    ) -> list:
+        
+        """
+        Process scene images for each frame.
+>>>>>>> origin
         """
 
         try:
 
             processed_frames = []
 
+<<<<<<< HEAD
             motion_styles = [
                 "zoom_in",
                 "zoom_out",
@@ -456,6 +625,28 @@ class ImageProcessor:
 
                 log_info(
                     f"Loading image : {image_path}"
+=======
+            ###################################################
+            # Validate Scene Images
+            ###################################################
+
+            if len(scene_images) < len(frames):
+
+                raise Exception(
+                    f"Not enough scene images.\n"
+                    f"Required : {len(frames)}\n"
+                    f"Available : {len(scene_images)}"
+                )
+
+            ###################################################
+            # Process Each Scene Image
+            ###################################################
+
+            for frame, image_path in zip(frames, scene_images):
+
+                log_info(
+                    f"Loading scene image : {image_path}"
+>>>>>>> origin
                 )
 
                 image = cv2.imread(image_path)
@@ -466,6 +657,7 @@ class ImageProcessor:
                         f"Image not found : {image_path}"
                     )
 
+<<<<<<< HEAD
                 ################################################
                 # Portrait / Landscape
                 ################################################
@@ -473,22 +665,40 @@ class ImageProcessor:
                 h, w = image.shape[:2]
 
                 if h > w:
+=======
+                ###################################################
+                # Resize
+                ###################################################
+
+                height, width = image.shape[:2]
+
+                if height > width:
+>>>>>>> origin
 
                     image = self.fit_portrait(image)
 
                 else:
 
                     image = self.resize_and_crop(image)
+<<<<<<< HEAD
 
                 ################################################
                 # Convert RGB
                 ################################################
+=======
+                
+
+                ###################################################
+                # Convert BGR → RGB
+                ###################################################
+>>>>>>> origin
 
                 image = cv2.cvtColor(
                     image,
                     cv2.COLOR_BGR2RGB
                 )
 
+<<<<<<< HEAD
                 ################################################
                 # Cinematic Filter
                 ################################################
@@ -524,11 +734,21 @@ class ImageProcessor:
                 transition = item.get("transition","crossfade")
                 processed_frames.append(
 
+=======
+                image = self.apply_ken_burns(image,frame["frame_id"])
+
+                ###################################################
+                # Store Frame
+                ###################################################
+
+                processed_frames.append(
+>>>>>>> origin
                     {
                         "frame_id": frame["frame_id"],
                         "image": image.copy(),
                         "start_time": frame["start_time"],
                         "end_time": frame["end_time"],
+<<<<<<< HEAD
                         "duration": frame["duration"],
                         "motion": motion,
                         "transition": transition,
@@ -548,3 +768,21 @@ class ImageProcessor:
             )
             raise
 
+=======
+                        "duration": frame["duration"]
+                    }
+                )
+
+            log_info(
+                f"{len(processed_frames)} images processed."
+            )
+
+            return processed_frames
+
+        except Exception as error:
+
+            log_error(
+                f"Image Processing Failed : {error}"
+            )
+            raise
+>>>>>>> origin

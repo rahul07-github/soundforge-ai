@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Virtual Environment
 venv/
 .venv/
@@ -16,3 +17,29 @@ echo "*.pyc" >> .gitignore
 
 # Environment variables
 .env
+=======
+# Virtual Environments
+.venv/
+backend/.venv-rvc/
+
+# Python
+__pycache__/
+*.pyc
+
+# Generated files
+backend/storage/
+backend/app/storage/generated/
+
+# Models
+*.pth
+*.pt
+*.ckpt
+*.onnx
+
+# Logs
+*.log
+install_log.txt
+
+# VS Code
+.vscode/
+>>>>>>> origin

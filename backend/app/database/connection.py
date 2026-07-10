@@ -1,7 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
+<<<<<<< HEAD
 DATABASE_URL = "mysql+pymysql://root:1234@localhost/soundforge_ai"
+=======
+DATABASE_URL = "mysql+pymysql://root:123456@localhost/soundforge_ai"
+>>>>>>> origin
 
 engine = create_engine(DATABASE_URL)
 

@@ -5,12 +5,20 @@ from backend.app.utils.logger import log_info, log_error
 
 class SceneLoader:
     """
+<<<<<<< HEAD
     Load all scene images from storage/datasets/Images.
+=======
+    Load all scene images from storage/assets/scenes.
+>>>>>>> origin
     """
 
     def __init__(self):
         self.scene_folder = Path(
+<<<<<<< HEAD
             "backend/app/storage/datasets/Images"
+=======
+            "backend/app/storage/generated/assets/scenes"
+>>>>>>> origin
         )
         log_info("SceneLoader initialized.")
 

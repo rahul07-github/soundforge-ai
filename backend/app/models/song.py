@@ -1,7 +1,11 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, DateTime
 from sqlalchemy.sql import func
 
+<<<<<<< HEAD
 from backend.app.database.connection import Base 
+=======
+from app.database.connection import Base 
+>>>>>>> origin
 from sqlalchemy.orm import relationship
 
 
