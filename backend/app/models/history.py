@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from app.database.connection import Base
+from backend.app.database.connection import Base
 
 
 class History(Base):

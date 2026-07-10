@@ -4,10 +4,11 @@
     "lyrics_path": "backend/app/storage/generated/lyrics/f5d3a8ac.txt",
     "song_path": "backend/app/storage/generated/songs/4fc11ca5.mp3",
     "cover_path": "backend/app/storage/generated/covers/aa94d25d.png",
-    "video_path": "D:\\SoundForgeAI\\soundforge-ai\\backend\\app\\storage\\generated\\videos\\video_fe306d67.mp4",
-    "thumbnail_path": "D:\\SoundForgeAI\\soundforge-ai\\backend\\app\\storage\\generated\\thumbnails\\thumbnail_f9e1310c.png",
-    "subtitle_path": "D:\\SoundForgeAI\\soundforge-ai\\backend\\app\\storage\\generated\\subtitles\\f5d3a8ac.srt",
+    "video_path": "D:\\SoundForgeAI\\soundforge-ai\\backend\\app\\storage\\generated\\videos\\video_019ad80d.mp4",
+    "thumbnail_path": "D:\\SoundForgeAI\\soundforge-ai\\backend\\app\\storage\\generated\\thumbnails\\thumbnail_1079f82b.png",
+    "subtitle_path": null,
     "status": "completed",
     "completion_date": "2026-07-05T23:21:37.836478",
-    "generated_at": "2026-07-06 08:25:32"
+    "generated_at": "2026-07-10 09:08:28",
+    "clip_duration": 20.0
 }
