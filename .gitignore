@@ -4,9 +4,9 @@ venv/
 env/
 
 # Python
-__pycache__/
-*.py[cod]
-*.pyo
+echo "venv/" >> .gitignore
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
 
 # VS Code
 .vscode/
