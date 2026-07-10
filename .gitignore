@@ -1,14 +1,24 @@
+# Virtual Environments
+.venv/
+backend/.venv-rvc/
+
 # Python
 __pycache__/
 *.pyc
-.venv/
-.env
-
-# Models
-models/
 
 # Generated files
+backend/storage/
 backend/app/storage/generated/
 
-# Database
-*.db
+# Models
+*.pth
+*.pt
+*.ckpt
+*.onnx
+
+# Logs
+*.log
+install_log.txt
+
+# VS Code
+.vscode/
