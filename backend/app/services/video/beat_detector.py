@@ -7,10 +7,8 @@ Description:
 Detects BPM and beat timestamps from the generated song.
 """
 
-<<<<<<< HEAD
+
 import traceback
-=======
->>>>>>> origin
 import librosa
 import numpy as np
 
@@ -28,7 +26,6 @@ class BeatDetector:
     def detect_beats(self, song_path: str) -> dict:
         """
         Detect beats from the given audio file.
-<<<<<<< HEAD
         """
 
         try:
@@ -37,36 +34,11 @@ class BeatDetector:
             # -----------------------------
             # Load Audio
             # -----------------------------
-=======
-
-        Parameters
-        ----------
-        song_path : str
-            Path to the generated MP3 file.
-
-        Returns
-        -------
-        dict
-            tempo
-            beat_frames
-            beat_times
-        """
-
-        try:
-
-            log_info(f"Loading audio : {song_path}")
-
-            # ---------------------------------------------
-            # Load Audio
-            # ---------------------------------------------
-
->>>>>>> origin
             audio, sample_rate = librosa.load(
                 song_path,
                 sr=None
             )
 
-<<<<<<< HEAD
             print("\n" + "=" * 60)
             print("DEBUG : AUDIO INFORMATION")
             print("=" * 60)
@@ -80,38 +52,21 @@ class BeatDetector:
             # -----------------------------
             # Beat Detection
             # -----------------------------
-=======
-            # ---------------------------------------------
-            # Beat Tracking
-            # ---------------------------------------------
-
->>>>>>> origin
             tempo, beat_frames = librosa.beat.beat_track(
                 y=audio,
                 sr=sample_rate
             )
 
-<<<<<<< HEAD
-=======
-            # ---------------------------------------------
-            # Convert Frame → Time
-            # ---------------------------------------------
-
->>>>>>> origin
             beat_times = librosa.frames_to_time(
                 beat_frames,
                 sr=sample_rate
             )
-<<<<<<< HEAD
 
-=======
->>>>>>> origin
             if isinstance(tempo, np.ndarray):
                 tempo = float(tempo[0])
             else:
                 tempo = float(tempo)
 
-<<<<<<< HEAD
             log_info(f"Beat Detection Completed | BPM : {tempo:.2f}")
 
             print("\n" + "=" * 60)
@@ -126,26 +81,10 @@ class BeatDetector:
                 "tempo": tempo,
                 "beat_frames": beat_frames.tolist(),
                 "beat_times": beat_times.tolist()
-=======
-            log_info(
-                f"Beat Detection Completed | BPM : {tempo:.2f}"
-            )
-
-
-            return {
-
-                "tempo": tempo,
-
-                "beat_frames": beat_frames.tolist(),
-
-                "beat_times": beat_times.tolist()
-
->>>>>>> origin
             }
 
         except Exception as error:
 
-<<<<<<< HEAD
             log_error(f"Beat Detection Failed : {repr(error)}")
 
             print("\n" + "=" * 60)
@@ -153,8 +92,5 @@ class BeatDetector:
             print("=" * 60)
             traceback.print_exc()
             print("=" * 60 + "\n")
-=======
-            log_error(f"Beat Detection Failed : {error}")
->>>>>>> origin
 
             raise

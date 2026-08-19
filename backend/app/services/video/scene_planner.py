@@ -82,9 +82,8 @@ class ScenePlanner:
 
             TARGET_SCENE_DURATION = 5.0
 
-            ####################################################
+            
             # Audio Duration
-            ####################################################
 
             total_duration = beat_times[-1]
 

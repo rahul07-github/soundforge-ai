@@ -4,18 +4,11 @@ Project : SoundForge AI
 Module : Video Generator
 
 Description:
-<<<<<<< HEAD
 Generate smooth cinematic silent videos using MoviePy.
 """
 
 import random
 import math
-=======
-Creates a silent cinematic video from processed frames.
-"""
-
-import random
->>>>>>> origin
 
 from moviepy.editor import (
     ImageClip,
@@ -34,7 +27,6 @@ from backend.app.utils.file_manager import create_directory
 
 class VideoGenerator:
     """
-<<<<<<< HEAD
     Professional Video Generator
     """
 
@@ -47,27 +39,23 @@ class VideoGenerator:
         ####################################################
 
         self.fps = 30
-
         self.transition_duration = 0.8
-
         self.max_zoom = 1.08
-
         self.pan_distance_x = 120
-
         self.pan_distance_y = 70
+        self.rotation_angle = 0.5
 
-        self.rotation_angle= 0.5
+        self.motion_types = [
+            "zoom_in", "zoom_out", "pan_left", "pan_right",
+            "pan_up", "pan_down", "diagonal_left", "diagonal_right"
+        ]
 
     ####################################################
     # Smooth Motion Curve
     ####################################################
 
     def ease(self, t):
-
-        """
-        Smooth animation curve
-        """
-
+        """Smooth animation curve"""
         return 3 * (t ** 2) - 2 * (t ** 3)
 
     ####################################################
@@ -75,15 +63,8 @@ class VideoGenerator:
     ####################################################
 
     def zoom_in(self, clip, duration):
-
         return clip.resize(
-
-            lambda t:
-
-            1 + (self.max_zoom - 1) *
-
-            self.ease(min(t / duration, 1))
-
+            lambda t: 1 + (self.max_zoom - 1) * self.ease(min(t / duration, 1))
         )
 
     ####################################################
@@ -91,45 +72,17 @@ class VideoGenerator:
     ####################################################
 
     def zoom_out(self, clip, duration):
-
         return clip.resize(
-
-            lambda t:
-
-            self.max_zoom -
-
-            (self.max_zoom - 1) *
-
-            self.ease(min(t / duration, 1))
-
+            lambda t: self.max_zoom - (self.max_zoom - 1) * self.ease(min(t / duration, 1))
         )
 
+    ####################################################
     # Pan Left
+    ####################################################
 
     def pan_left(self, clip, duration):
-
-        return (
-
-            clip
-
-            .resize(self.max_zoom)
-
-            .set_position(
-
-                lambda t:
-
-                (
-
-                    -self.pan_distance_x *
-
-                    self.ease(min(t / duration, 1)),
-
-                    "center"
-
-                )
-
-            )
-
+        return clip.resize(self.max_zoom).set_position(
+            lambda t: (-self.pan_distance_x * self.ease(min(t / duration, 1)), "center")
         )
 
     ####################################################
@@ -137,29 +90,8 @@ class VideoGenerator:
     ####################################################
 
     def pan_right(self, clip, duration):
-
-        return (
-
-            clip
-
-            .resize(self.max_zoom)
-
-            .set_position(
-
-                lambda t:
-
-                (
-
-                    self.pan_distance_x *
-
-                    self.ease(min(t / duration, 1)),
-
-                    "center"
-
-                )
-
-            )
-
+        return clip.resize(self.max_zoom).set_position(
+            lambda t: (self.pan_distance_x * self.ease(min(t / duration, 1)), "center")
         )
 
     ####################################################
@@ -167,29 +99,8 @@ class VideoGenerator:
     ####################################################
 
     def pan_up(self, clip, duration):
-
-        return (
-
-            clip
-
-            .resize(self.max_zoom)
-
-            .set_position(
-
-                lambda t:
-
-                (
-
-                    "center",
-
-                    -self.pan_distance_y *
-
-                    self.ease(min(t / duration, 1))
-
-                )
-
-            )
-
+        return clip.resize(self.max_zoom).set_position(
+            lambda t: ("center", -self.pan_distance_y * self.ease(min(t / duration, 1)))
         )
 
     ####################################################
@@ -197,29 +108,8 @@ class VideoGenerator:
     ####################################################
 
     def pan_down(self, clip, duration):
-
-        return (
-
-            clip
-
-            .resize(self.max_zoom)
-
-            .set_position(
-
-                lambda t:
-
-                (
-
-                    "center",
-
-                    self.pan_distance_y *
-
-                    self.ease(min(t / duration, 1))
-
-                )
-
-            )
-
+        return clip.resize(self.max_zoom).set_position(
+            lambda t: ("center", self.pan_distance_y * self.ease(min(t / duration, 1)))
         )
 
     ####################################################
@@ -227,31 +117,11 @@ class VideoGenerator:
     ####################################################
 
     def diagonal_left(self, clip, duration):
-
-        return (
-
-            clip
-
-            .resize(self.max_zoom)
-
-            .set_position(
-
-                lambda t:
-
-                (
-
-                    -self.pan_distance_x *
-
-                    self.ease(min(t / duration, 1)),
-
-                    -self.pan_distance_y *
-
-                    self.ease(min(t / duration, 1))
-
-                )
-
+        return clip.resize(self.max_zoom).set_position(
+            lambda t: (
+                -self.pan_distance_x * self.ease(min(t / duration, 1)),
+                -self.pan_distance_y * self.ease(min(t / duration, 1))
             )
-
         )
 
     ####################################################
@@ -259,358 +129,124 @@ class VideoGenerator:
     ####################################################
 
     def diagonal_right(self, clip, duration):
-
-        return (
-
-            clip
-
-            .resize(self.max_zoom)
-
-            .set_position(
-
-                lambda t:
-
-                (
-
-                    self.pan_distance_x *
-
-                    self.ease(min(t / duration, 1)),
-
-                    self.pan_distance_y *
-
-                    self.ease(min(t / duration, 1))
-
-                )
-
+        return clip.resize(self.max_zoom).set_position(
+            lambda t: (
+                self.pan_distance_x * self.ease(min(t / duration, 1)),
+                self.pan_distance_y * self.ease(min(t / duration, 1))
             )
-
         )
 
     ####################################################
     # Apply Camera Motion
     ####################################################
 
-    def apply_motion(
-        self,clip,motion,duration
+    def apply_motion(self, clip, motion, duration):
 
-    ):
+        motion_map = {
+            "zoom_in": self.zoom_in,
+            "zoom_out": self.zoom_out,
+            "pan_left": self.pan_left,
+            "pan_right": self.pan_right,
+            "pan_up": self.pan_up,
+            "pan_down": self.pan_down,
+            "diagonal_left": self.diagonal_left,
+            "diagonal_right": self.diagonal_right
+        }
 
-        if motion == "zoom_in":
+        function = motion_map.get(motion)
 
-            return self.zoom_in(clip,duration)
-
-        elif motion == "zoom_out":
-
-            return self.zoom_out(
-
-                clip,
-
-                duration
-
-            )
-
-        elif motion == "pan_left":
-
-            return self.pan_left(
-
-                clip,
-
-                duration
-
-            )
-
-        elif motion == "pan_right":
-
-            return self.pan_right(
-
-                clip,
-
-                duration
-
-            )
-
-        elif motion == "pan_up":
-
-            return self.pan_up(
-
-                clip,
-
-                duration
-
-            )
-
-        elif motion == "pan_down":
-
-            return self.pan_down(
-                clip,
-                duration
-            )
-
-        elif motion == "diagonal_left":
-
-            return self.diagonal_left(
-
-                clip,
-
-                duration
-
-            )
-
-        elif motion == "diagonal_right":
-
-            return self.diagonal_right(
-
-                clip,
-
-                duration
-
-            )
+        if function:
+            return function(clip, duration)
 
         return clip
-    
 
-=======
-    Generate silent cinematic video.
-    """
+    ####################################################
+    # Main Generator (this was completely missing)
+    ####################################################
 
-    def __init__(self):
-        log_info("VideoGenerator initialized.")
-
->>>>>>> origin
     def generate_video(self, processed_frames: list) -> str:
 
         try:
 
-<<<<<<< HEAD
             log_info("Generating cinematic silent video...")
 
             clips = []
             timeline = 0
 
-            for frame in processed_frames:
+            # Total real duration (so final video matches audio length,
+            # not shrunk by transition overlaps)
+            true_total_duration = sum(
+                max(frame["duration"], 1.2) for frame in processed_frames
+            )
 
-                duration = max(
-                    frame["duration"],
-                    1.5
+            last_motion = None
+
+            for index, frame in enumerate(processed_frames):
+
+                duration = max(frame["duration"], 1.2)
+
+                # Use motion from image_processor if present,
+                # otherwise pick a random one (avoiding repeat)
+                motion = frame.get("motion")
+
+                if not motion or motion == last_motion:
+                    motion = random.choice(self.motion_types)
+                    while motion == last_motion:
+                        motion = random.choice(self.motion_types)
+
+                last_motion = motion
+
+                is_last = (index == len(processed_frames) - 1)
+
+                # Extend duration to compensate for crossfade overlap,
+                # so total timeline doesn't shrink
+                extended_duration = (
+                    duration if is_last
+                    else duration + self.transition_duration
                 )
 
                 clip = (
                     ImageClip(frame["image"])
-                    .set_duration(duration)
+                    .set_duration(extended_duration)
                     .resize((VIDEO_WIDTH, VIDEO_HEIGHT))
                 )
 
-                # Apply camera motion
-                clip = self.apply_motion(
-                    clip,
-                    frame.get("motion"),
-                    duration
-                )
+                clip = self.apply_motion(clip, motion, extended_duration)
 
-                # Gentle cinematic zoom
-                ####################################################
-
-                zoom_speed = 0.03
-
-                clip = clip.resize(
-                    lambda t:
-                    1 + zoom_speed *
-                    self.ease(min(t / duration, 1))
-                )
-
-                ####################################################
-                # Small camera drift
-                ####################################################
-
+                # Subtle camera drift / breathing rotation
+                angle = random.uniform(-self.rotation_angle, self.rotation_angle)
                 clip = clip.rotate(
-                    lambda t:
-                    self.rotation_angle *
-                    math.sin(
-                        2 * math.pi * t / duration
-                    )
-                )
-
-
-                # Apply transition
-                transition = frame.get(
-                    "transition","crossfade"
+                    lambda t, a=angle, d=extended_duration: a * math.sin(2 * math.pi * t / d)
                 )
 
                 clip = clip.set_start(timeline)
 
+                transition = frame.get("transition", "crossfade")
+
                 if transition == "crossfade":
-                    clip = (clip.crossfadein(0.5)
-                            .fadeout(0.3))
-                        
-
+                    clip = clip.crossfadein(self.transition_duration)
                 elif transition == "fade":
-                    clip = (clip.fadein(0.5)
-                            .fadeout(0.5))
-                    
-                elif transition =="soft":
-                    clip=(clip.fadein(0.25)
-                          .fadeout(0.25))
-                    
-                elif transition =="zoom":
-                    clip=(clip.resize(lambda t: 1+ 0.5*(t/duration))
-                          .crossfadein(0.5))
+                    clip = clip.fadein(self.transition_duration).fadeout(self.transition_duration)
+                elif transition == "dissolve":
+                    clip = clip.crossfadein(self.transition_duration * 1.3)
 
-                timeline += duration - 0.30
-                    
+                # Advance timeline by ORIGINAL duration (overlap
+                # already compensated via extended_duration above)
+                timeline += duration
 
                 clips.append(clip)
 
             ####################################################
             # Merge All Clips
             ####################################################
-=======
-            log_info("Generating silent video.")
-
-            fps = 30
-            transition = 0.40
-
-            timeline = 0
-            clips = []
-
-            camera_effects = [
-                "zoom_in",
-                "zoom_out",
-                "pan_left",
-                "pan_right",
-                "pan_up",
-                "pan_down"
-            ]
-
-            ##################################################
-            # Create Animated Clips
-            ##################################################
-
-            for frame in processed_frames:
-
-                image = frame["image"]
-
-                duration = max(
-                    frame["duration"],
-                    0.30
-                )
-
-                effect = random.choice(
-                    camera_effects
-                )
-
-                clip = (
-                    ImageClip(image)
-                    .set_duration(duration)
-                    .resize(
-                        (
-                            VIDEO_WIDTH,
-                            VIDEO_HEIGHT
-                        )
-                    )
-                )
-
-                ##################################################
-                # Camera Motion
-                ##################################################
-
-                if effect == "zoom_in":
-
-                    clip = clip.resize(
-                        lambda t:
-                        1 + 0.12 * (t / duration)
-                    )
-
-                elif effect == "zoom_out":
-
-                    clip = clip.resize(
-                        lambda t:
-                        1.12 - 0.12 * (t / duration)
-                    )
-
-                elif effect == "pan_left":
-
-                    clip = (
-                        clip
-                        .resize(1.08)
-                        .set_position(
-                            lambda t: (
-                                -120 * t / duration,
-                                "center"
-                            )
-                        )
-                    )
-
-                elif effect == "pan_right":
-
-                    clip = (
-                        clip
-                        .resize(1.08)
-                        .set_position(
-                            lambda t: (
-                                120 * t / duration,
-                                "center"
-                            )
-                        )
-                    )
-
-                elif effect == "pan_up":
-
-                    clip = (
-                        clip
-                        .resize(1.08)
-                        .set_position(
-                            lambda t: (
-                                "center",
-                                -80 * t / duration
-                            )
-                        )
-                    )
-
-                elif effect == "pan_down":
-
-                    clip = (
-                        clip
-                        .resize(1.08)
-                        .set_position(
-                            lambda t: (
-                                "center",
-                                80 * t / duration
-                            )
-                        )
-                    )
-
-                ##################################################
-                # Timeline
-                ##################################################
-
-                clip = (
-                    clip
-                    .set_start(timeline)
-                    .crossfadein(transition)
-                )
-
-                timeline += duration - transition
-
-                clips.append(clip)
-
-            ##################################################
-            # Composite Video
-            ##################################################
->>>>>>> origin
 
             final_clip = CompositeVideoClip(
                 clips,
-                size=(
-                    VIDEO_WIDTH,
-                    VIDEO_HEIGHT
-                )
+                size=(VIDEO_WIDTH, VIDEO_HEIGHT)
             )
 
-            final_clip = final_clip.set_duration(
-<<<<<<< HEAD
-                timeline +
-                self.transition_duration
-            )
+            # Final duration now exactly matches audio length
+            final_clip = final_clip.set_duration(true_total_duration)
 
             ####################################################
             # Export Video
@@ -620,10 +256,7 @@ class VideoGenerator:
 
             output_path = (
                 TEMP_FOLDER /
-                build_output_filename(
-                    "temp_video",
-                    "mp4"
-                )
+                build_output_filename("temp_video", "mp4")
             )
 
             final_clip.write_videofile(
@@ -633,65 +266,22 @@ class VideoGenerator:
                 audio=False,
                 preset="slow",
                 bitrate="8000k",
-                audio_codec="aac",
-                ffmpeg_params=["-crf","17","-pix_fmt","yuv420p"],
+                ffmpeg_params=["-crf", "17", "-pix_fmt", "yuv420p"],
                 threads=4,
                 logger=None
             )
 
             final_clip.close()
+
             for clip in clips:
                 clip.close()
 
-            log_info(
-                f"Video saved : {output_path}"
-            )
-
-            return str(output_path)
-        except Exception as error:
-            log_error(
-                f"Video Generation Failed : {error}"
-            )
-=======
-                timeline + duration
-            )
-
-            ##################################################
-            # Output Path
-            ##################################################
-
-            create_directory(TEMP_FOLDER)
-
-            filename = build_output_filename(
-                "temp_video",
-                "mp4"
-            )
-
-            output_path = TEMP_FOLDER / filename
-
-            ##################################################
-            # Export
-            ##################################################
-
-            final_clip.write_videofile(
-                str(output_path),
-                codec="libx264",
-                fps=fps,
-                audio=False,
-                logger=None
-            )
-
-            log_info(
-                f"Silent video created : {output_path}"
-            )
+            log_info(f"Video saved : {output_path}")
 
             return str(output_path)
 
         except Exception as error:
 
-            log_error(
-                f"Video Generation Failed : {error}"
-            )
+            log_error(f"Video Generation Failed : {error}")
 
->>>>>>> origin
             raise

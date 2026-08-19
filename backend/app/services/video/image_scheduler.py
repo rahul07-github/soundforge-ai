@@ -1,11 +1,4 @@
-"""
-Project : SoundForge AI
-
-Module : Image Scheduler
-
-Description:
-Create a cinematic image schedule for every frame.
-"""
+#
 
 import random
 
@@ -17,7 +10,7 @@ from backend.app.utils.logger import (
 
 class ImageScheduler:
     """
-    Smart scheduler for cinematic videos.
+    Schedule images for every frame.
     """
 
     def __init__(self):
@@ -26,10 +19,7 @@ class ImageScheduler:
 
         self.transitions = [
             "crossfade",
-            "crossfade",
-            "crossfade",
             "fade",
-            "soft",
             "zoom"
         ]
 
@@ -43,24 +33,27 @@ class ImageScheduler:
             "diagonal_left",
             "diagonal_right"
         ]
-
+    # Schedule Images
     def schedule_images(
         self,
         frames: list,
+        scenes: list,
         mixed_images: list
     ) -> list:
 
         try:
 
-            if not mixed_images:
-                raise Exception("No images available.")
+            if len(mixed_images) == 0:
+
+                raise Exception(
+                    "No images available."
+                )
 
             image_pool = mixed_images.copy()
+
             random.shuffle(image_pool)
 
             scheduled = []
-
-            used_images = []
 
             last_image = None
             last_motion = None
@@ -69,68 +62,67 @@ class ImageScheduler:
 
             for index, frame in enumerate(frames):
 
-                ################################################
-                # Reload image pool
-                ################################################
+                # Reload Pool
+                if len(image_pool) == 0:
 
-                if not image_pool:
-
-                    image_pool = [
-                        img
-                        for img in mixed_images
-                        if img not in used_images[-12:]
-                    ]
-
-                    if not image_pool:
-                        image_pool = mixed_images.copy()
+                    image_pool = mixed_images.copy()
 
                     random.shuffle(image_pool)
 
-                ################################################
-                # Image Selection
-                ################################################
+                
+                # Pick Image  
 
                 image = image_pool.pop(0)
 
-                if image == last_image and image_pool:
+                if image == last_image and len(image_pool) > 0:
 
                     image_pool.append(image)
+
                     image = image_pool.pop(0)
 
-                ################################################
+                
                 # Song Progress
-                ################################################
 
-                progress = index / max(1, total_frames)
+                scene=scenes[
+                    min(index, len(scenes) - 1)
+                ]
+                energy=scene["energy"]
+                category=scene["category"]
 
-                energy=frame["energy"]
+            
+                # Energy Curve
+
+                # if progress < 0.20:
+                #     energy = "low"
+
+                # elif progress < 0.45:
+                #     energy = "medium"
+
+                # elif progress < 0.75:
+                #     energy = "high"
+
+                # else:
+                #     energy = "medium"
 
                 ################################################
                 # Motion Selection
                 ################################################
 
-                ################################################
-                # Motion Based On Beat Energy
-                ################################################
-
-                if energy <= 2:
-
+                if energy < 0.40:
                     candidates = [
                         "zoom_in",
-                        "zoom_out"
-                    ]
-
-                elif energy <= 5:
-
-                    candidates = [
                         "pan_left",
-                        "pan_right",
-                        "pan_up",
-                        "pan_down"
+                        "pan_right"
                     ]
 
+                elif energy < 0.75:
+                    candidates = [
+                        "zoom_out",
+                        "pan_up",
+                        "pan_down",
+                        "diagonal_left"
+                    ]
                 else:
-
                     candidates = [
                         "diagonal_left",
                         "diagonal_right",
@@ -140,86 +132,90 @@ class ImageScheduler:
 
                 motion = random.choice(candidates)
 
-                while motion == last_motion and len(candidates) > 1:
-
+                while (
+                    motion == last_motion
+                    and len(candidates) > 1
+                ):
                     motion = random.choice(candidates)
 
-                motion = random.choice(candidates)
-
-                while motion == last_motion and len(candidates) > 1:
-                    motion = random.choice(candidates)
-
-                ################################################
                 # Transition
-                ################################################
+                
 
-                if energy <= 2:
-
-                    transition = "soft"
-
-                elif energy <= 5:
-
+                if energy == "low":
                     transition = "crossfade"
 
+                elif energy == "medium":
+                    transition = random.choice(
+                        [
+                            "crossfade",
+                            "fade"
+                        ]
+                    )
                 else:
+                    transition = random.choice(
+                        self.transitions
+                    )
 
-                    transition = random.choice([
-                        "zoom",
-                        "crossfade"
-                    ])
+                
+                # Store Scene
 
-                ################################################
-                # Scene
-                ################################################
+                scheduled.append(
+                    {
+                        "scene_id":scene["scene_id"],
+                        "category":category,
+                        "scene_duration":scene["duration"],
 
-                scheduled.append({
+                        "frame": frame,
 
-                    "scene_id": index + 1,
+                        "image_path": image,
 
-                    "frame": frame,
+                        "motion": motion,
 
-                    "image_path": image,
+                        "transition": transition,
 
-                    "motion": motion,
+                        "energy": energy,
 
-                    "transition": transition,
+                        "zoom": round(
+                            random.uniform(
+                                1.05,
+                                1.10
+                            ),
+                            2
+                        ),
 
-                    "zoom": (
-                        1.04
-                        if energy <= 2
-                        else 1.08
-                        if energy <= 5
-                        else 1.12
-                    ),
+                        "brightness": round(
+                            random.uniform(
+                                0.98,
+                                1.03
+                            ),
+                            2
+                        ),
 
-                    "brightness": (
-                        0.98
-                        if energy <= 2
-                        else 1.00
-                        if energy <= 5
-                        else 1.03
-                    ),
-
-                    "brightness": (
-                        0.98
-                        if energy <= 2
-                        else 1.00
-                        if energy <= 5
-                        else 1.03
-                    ),
-
-                })
+                        "contrast": round(
+                            random.uniform(
+                                1.00,
+                                1.08
+                            ),
+                            2
+                        )
+                    }
+                )
 
                 last_image = image
                 last_motion = motion
-                used_images.append(image)
+
+
+            # Logs
 
             log_info(
                 f"Frames Scheduled : {len(scheduled)}"
             )
+            log_info(
+                f"Scenes Available: {len(scenes)}"
+            )
 
             log_info(
-                f"Unique Images Used : {len(set(used_images))}"
+                f"Images Used : {len(set(item['image_path'] for item in scheduled))}"
             )
 
             return scheduled
