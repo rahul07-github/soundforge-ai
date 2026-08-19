@@ -1,10 +1,38 @@
 # 🎵 SoundForge AI
 
-### AI-Powered Text-to-Song-to-Video Generation Platform
+### AI-Powered Text → Song → Video Generation Platform
 
-SoundForge AI is a team-based AI media generation project that converts a user's text prompt into lyrics and music and then transforms the generated song into a cinematic video using a curated image dataset, audio analysis, intelligent image selection, camera motion, transitions, color grading, and video processing.
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688)
+![PyTorch](https://img.shields.io/badge/PyTorch-AI%2FML-EE4C2C)
+![Status](https://img.shields.io/badge/Status-Active%20Development-yellow)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-The goal is to automate the journey from a creative idea to a complete **song + visual video** without requiring manual video editing.
+SoundForge AI converts a user's text prompt into lyrics and music, then transforms the generated song into a **cinematic music video** — using a curated image dataset, audio analysis, intelligent image selection, camera motion, transitions, color grading, and video processing.
+
+The goal: go from a creative idea to a complete **song + visual video**, with no manual video editing.
+
+---
+
+## 📑 Table of Contents
+
+- [Project Overview](#-project-overview)
+- [Project Objective](#-project-objective)
+- [Team Responsibilities](#-team-responsibilities)
+- [Project Structure](#️-project-structure)
+- [How Text Becomes a Video](#-how-text-becomes-a-video)
+- [AI / Intelligent Approaches](#-ai--intelligent-approaches)
+- [Technology Stack](#️-technology-stack)
+- [Hardware Requirements & Constraints](#-hardware-requirements--constraints)
+- [Major Problems Faced](#-major-problems-faced)
+- [Engineering Approach](#-engineering-approach)
+- [Current Development Direction](#-current-development-direction)
+- [Future Improvements](#-future-improvements)
+- [Running the Project](#️-running-the-project)
+- [What I Learned](#-what-i-learned)
+- [My Contribution](#-my-contribution)
+- [Project Status](#-project-status)
+- [Contact](#-contact)
 
 ---
 
@@ -14,178 +42,75 @@ The goal is to automate the journey from a creative idea to a complete **song + 
 User Prompt
      │
      ▼
-Lyrics Generation
+Lyrics Generation → Music/Song Generation → Generated Song
      │
      ▼
-Music / Song Generation
+Audio Analysis (BPM, Beats, Duration, Energy)
      │
      ▼
-Generated Song
+Mood Detection → Category Selection → Image Dataset
      │
      ▼
-Audio Analysis
-     ├── BPM Detection
-     ├── Beat Detection
-     ├── Song Duration
-     └── Energy / Timing Information
+Image Ranking → Image Mixing → Image Scheduling
      │
      ▼
-Mood Detection
+Camera Motion (Zoom In/Out, Pan, Diagonal)
      │
      ▼
-Category Selection
+Color Grading → Depth/Parallax → Transitions
      │
      ▼
-Image Dataset
+Silent Video Generation → Audio + Video Merge
      │
      ▼
-Image Ranking
-     │
-     ▼
-Image Mixing
-     │
-     ▼
-Image Scheduling
-     │
-     ▼
-Camera Motion
-     ├── Zoom In
-     ├── Zoom Out
-     ├── Pan
-     └── Diagonal Motion
-     │
-     ▼
-Color Grading
-     │
-     ▼
-Depth / Parallax Processing
-     │
-     ▼
-Transitions
-     │
-     ▼
-Silent Video Generation
-     │
-     ▼
-Audio + Video Merge
-     │
-     ▼
-Subtitle / Thumbnail Processing
-     │
-     ▼
-Final MP4 Video
+Subtitle/Thumbnail Processing → Final MP4 Video
 ```
 
-The core idea is to synchronize the visual experience with the generated song instead of producing a basic random image slideshow.
+The core idea: synchronize the visual experience with the generated song, instead of producing a random image slideshow.
 
 ---
 
-# 🎯 Project Objective
+## 🎯 Project Objective
 
-SoundForge AI aims to transform a simple creative prompt into a complete multimedia experience.
+Turn a simple creative prompt into a complete multimedia experience.
 
-Example:
+**Example:**
 
 ```text
-Prompt
-"A peaceful romantic song about watching the sunset
-with someone you love."
+Prompt: "A peaceful romantic song about watching the sunset with someone you love."
 
-        ↓
-
-Lyrics
-        ↓
-Generated Song
-        ↓
-Mood / Category Detection
-        ↓
-Relevant Images
-        ↓
-Audio / Beat Analysis
-        ↓
-Image Scheduling
-        ↓
-Camera Motion + Parallax + Transitions
-        ↓
-Final Cinematic Video
+  → Lyrics → Generated Song → Mood/Category Detection
+  → Relevant Images → Audio/Beat Analysis → Image Scheduling
+  → Camera Motion + Parallax + Transitions → Final Cinematic Video
 ```
 
 ---
 
-# 👥 Team Responsibilities
-
-SoundForge AI is a collaborative project with different responsibilities across the team.
+## 👥 Team Responsibilities
 
 ### 🎼 Fahim — Lyrics & Music Generation
+- Processes the user's creative prompt
+- Generates lyrics and music/song audio
+- Provides the generated song to the video pipeline
 
-Fahim works on the lyrics and music-generation side of the project.
-
-Responsibilities include:
-
-- Processing the user's creative prompt
-- Generating lyrics
-- Working on music/song generation
-- Producing the generated audio
-- Providing the generated song to the video pipeline
-
-The generated song becomes the primary input for the video-generation stage.
-
----
-
-### 🎬 Rahul — Video Processing & Generation
-
-My primary responsibility is the **video-generation pipeline**.
-
-I work on converting the generated song and visual dataset into a complete video.
-
-Responsibilities include:
-
-- Audio analysis integration
-- Beat/BPM-based timing
-- Frame generation
-- Image dataset processing
-- Image mixing
-- Image ranking
-- Prompt-aware image selection
-- Image scheduling
-- Camera motion
-- Cinematic effects
-- Color grading
-- Depth/parallax effects
-- Image-to-video processing
-- Transitions
-- Audio/video synchronization
-- Video rendering
-- FFmpeg integration
-- Thumbnail generation
-- Subtitle integration
+### 🎬 Rahul — Video Processing & Generation *(my role)*
+- Audio analysis integration, beat/BPM-based timing
+- Image dataset processing, ranking, mixing, scheduling
+- Camera motion, cinematic effects, color grading
+- Depth/parallax effects, transitions
+- Video rendering, FFmpeg integration
+- Audio/video sync, subtitle + thumbnail generation
 - Pipeline debugging and improvement
 
-The main objective of my module is to make the output feel more like a **cinematic music video rather than a basic image slideshow**.
-
----
+**Objective of my module:** make the output feel like a cinematic music video — not a slideshow.
 
 ### ⚙️ Backend / Core Team
-
-The backend/core component connects the different services and provides the API layer through which the generation pipeline is executed.
-
-```text
-Prompt
- ↓
-Lyrics / Music
- ↓
-Video Generation
- ↓
-Storage
- ↓
-Final Output
-```
+Connects services and exposes the generation pipeline through the API layer:
+`Prompt → Lyrics/Music → Video Generation → Storage → Final Output`
 
 ---
 
-# 🏗️ Project Structure
-
-The video service currently follows a modular architecture.
+## 🏗️ Project Structure
 
 ```text
 soundforge-ai/
@@ -228,15 +153,9 @@ soundforge-ai/
 │   │   └── storage/
 │   │       ├── datasets/
 │   │       └── generated/
-│   │           ├── assets/
-│   │           ├── covers/
-│   │           ├── lyrics/
-│   │           ├── metadata/
-│   │           ├── preview/
-│   │           ├── songs/
-│   │           ├── subtitles/
-│   │           ├── thumbnails/
-│   │           └── videos/
+│   │           ├── assets/ ├── covers/ ├── lyrics/ ├── metadata/
+│   │           ├── preview/ ├── songs/ ├── subtitles/
+│   │           ├── thumbnails/ └── videos/
 │   │
 │   └── requirements.txt
 │
@@ -246,94 +165,34 @@ soundforge-ai/
 
 ---
 
-# 🎬 How Text Becomes a Video
+## 🎬 How Text Becomes a Video
 
-The project connects the team's modules through a sequential pipeline.
+**Step 1 — User Prompt:** `"Create a peaceful song about mountains and sunset."`
 
-### Step 1 — User Prompt
+**Step 2 — Lyrics and Music:** Prompt → Lyrics → Generated Song
 
-The user provides a creative description.
-
-```text
-"Create a peaceful song about mountains and sunset."
-```
-
-### Step 2 — Lyrics and Music
-
-The prompt is processed by the lyrics/music side of the project.
-
-```text
-Prompt
-  ↓
-Lyrics
-  ↓
-Generated Song
-```
-
-### Step 3 — Audio Analysis
-
-The video module receives the generated song and analyzes:
-
-- Duration
-- BPM
-- Beats
-- Timing
-- Energy information
-
-Example:
-
+**Step 3 — Audio Analysis:**
 ```text
 Song Duration: 20 seconds
 BPM: 156.61
-
-Detected Beats:
-0.17
-0.55
-0.94
-1.32
-1.70
-2.10
-...
+Detected Beats: 0.17, 0.55, 0.94, 1.32, 1.70, 2.10 ...
 ```
 
-### Step 4 — Mood and Category Selection
-
-The system determines the visual direction of the song.
-
-Example:
-
+**Step 4 — Mood and Category Selection:**
 ```text
 Mood: nature
-
-Categories:
-- nature
-- forest
-- mountains
-- sunset
+Categories: nature, forest, mountains, sunset
 ```
 
-### Step 5 — Image Selection
-
-The current prototype uses a **manually collected and organized image dataset**.
+**Step 5 — Image Selection:** current prototype uses a manually collected, organized image dataset, ranked with quality metrics + CLIP-based semantic similarity.
 
 ```text
-datasets/
-└── Images/
-    ├── nature/
-    ├── forest/
-    ├── mountains/
-    ├── sunset/
-    ├── romantic/
-    ├── sad/
-    └── lofi/
+datasets/Images/
+├── nature/ ├── forest/ ├── mountains/ ├── sunset/
+├── romantic/ ├── sad/ └── lofi/
 ```
 
-Images are ranked using quality metrics and CLIP-based semantic similarity.
-
-### Step 6 — Scene Scheduling
-
-Each selected image receives scene metadata:
-
+**Step 6 — Scene Scheduling:** each selected image gets scene metadata:
 ```python
 {
     "image_path": "...",
@@ -346,73 +205,27 @@ Each selected image receives scene metadata:
 }
 ```
 
-### Step 7 — Cinematic Processing
+**Step 7 — Cinematic Processing:** resizing/cropping, camera motion, color grading, transitions, depth/parallax.
 
-The images are processed with:
-
-- Resizing/cropping
-- Camera motion
-- Color grading
-- Transitions
-- Depth/parallax processing
-
-### Step 8 — Video and Audio Merge
-
-```text
-Processed Visual Scenes
-          +
-      Generated Song
-          ↓
-      Final MP4
-```
+**Step 8 — Video and Audio Merge:** `Processed Visual Scenes + Generated Song → Final MP4`
 
 ---
 
-# 🧠 AI / Intelligent Approaches
+## 🧠 AI / Intelligent Approaches
 
-SoundForge AI combines AI models, classical computer vision, audio analysis, and rule-based scheduling rather than relying on a single model.
+| Technique | Purpose |
+|---|---|
+| Audio Intelligence | BPM detection, beat detection, audio/scene timing |
+| Semantic Image Matching | CLIP-based ranking — how well an image matches the prompt/context |
+| Depth Estimation | Spatial movement and parallax effects (in progress) |
+| Rule-Based Visual Scheduling | Decides image order, motion, transitions, energy pacing |
+| Classical Computer Vision (OpenCV) | Reading, resizing, cropping, sharpness/brightness/contrast analysis |
 
-### Audio Intelligence
-
-Used for:
-
-- BPM detection
-- Beat detection
-- Audio timing
-- Scene timing
-
-### Semantic Image Matching
-
-CLIP-based ranking helps determine how closely an image matches the available prompt/context.
-
-### Depth Estimation
-
-Depth estimation is being integrated to improve spatial movement and parallax effects.
-
-### Rule-Based Visual Scheduling
-
-The scheduler determines:
-
-- Which image should appear
-- Which motion should be applied
-- Which transition should be used
-- How visual energy changes through the song
-
-### Classical Computer Vision
-
-OpenCV is used for:
-
-- Image reading
-- Resizing
-- Cropping
-- Sharpness measurement
-- Brightness analysis
-- Contrast analysis
-- Image processing
+SoundForge AI combines AI models, classical CV, audio analysis, and rule-based scheduling — rather than relying on a single model.
 
 ---
 
-# 🛠️ Technology Stack
+## 🛠️ Technology Stack
 
 | Area | Technologies |
 |---|---|
@@ -426,461 +239,140 @@ OpenCV is used for:
 
 ---
 
-# 🔄 End-to-End Architecture
+## 💻 Hardware Requirements & Constraints
 
-```text
-                         USER
-                           │
-                           ▼
-                     TEXT PROMPT
-                           │
-                           ▼
-                  ┌────────────────┐
-                  │ Lyrics Module  │
-                  └───────┬────────┘
-                          │
-                          ▼
-                  ┌────────────────┐
-                  │ Music Module   │
-                  └───────┬────────┘
-                          │
-                          ▼
-                      SONG / AUDIO
-                          │
-                          ▼
-              ┌─────────────────────────┐
-              │      VIDEO PIPELINE     │
-              │                         │
-              │ Audio Analysis          │
-              │        ↓                │
-              │ Mood Detection          │
-              │        ↓                │
-              │ Category Selection      │
-              │        ↓                │
-              │ Image Dataset           │
-              │        ↓                │
-              │ Image Ranking           │
-              │        ↓                │
-              │ Image Mixing             │
-              │        ↓                │
-              │ Image Scheduling        │
-              │        ↓                │
-              │ Camera Motion            │
-              │        ↓                │
-              │ Color Grading            │
-              │        ↓                │
-              │ Depth / Parallax         │
-              │        ↓                │
-              │ Transitions              │
-              │        ↓                │
-              │ Video Generation         │
-              │        ↓                │
-              │ Audio Merge              │
-              └──────────┬──────────────┘
-                         │
-                         ▼
-                    FINAL VIDEO
-```
+Development and testing were done on consumer-grade hardware, which directly shaped some engineering decisions:
+
+- **GPU:** RTX 2050, 4GB VRAM
+- **Free storage:** ~8GB during development
+
+**Impact:** heavier compute stages (advanced depth models, larger batch rendering) had to be scoped down or deferred rather than run at full quality. This is a known, intentional trade-off — not an oversight — and is documented here so the design choices below make sense in context.
 
 ---
 
-# 🚧 Major Problems Faced
+## 🚧 Major Problems Faced
 
-Building the video pipeline involved several practical engineering challenges.
+**1. Beat Detection** — audio decoding was unreliable at first (`PySoundFile failed`, `NoBackendError()`). Fixed by ensuring MP3 files were correctly decoded before beat analysis.
 
-## 1. Beat Detection
+**2. FFmpeg Integration** — used for trimming, conversion, merging, encoding, export. Incorrect paths/codecs/formats caused pipeline failures; required careful path and codec handling.
 
-Audio decoding and beat detection were not always reliable.
+**3. Image Processing** — dataset images vary in aspect ratio, resolution, orientation, and color. Needed portrait/landscape handling, resizing, cropping, and consistent formatting.
 
-During development, errors included:
-
-```text
-PySoundFile failed
-NoBackendError()
-```
-
-The audio pipeline had to be debugged to ensure MP3 files were correctly decoded before beat analysis.
-
-## 2. FFmpeg Integration
-
-FFmpeg is used for:
-
-- Audio trimming
-- Audio conversion
-- Audio/video merging
-- Video encoding
-- Final export
-
-Incorrect paths, codecs, or media formats could cause pipeline failures.
-
-## 3. Image Processing
-
-The dataset contains images with different:
-
-- Aspect ratios
-- Resolutions
-- Orientations
-- Color characteristics
-
-The pipeline therefore needed portrait/landscape handling, resizing, cropping, and consistent formatting.
-
-## 4. Metadata Mismatch
-
-Multiple pipeline stages depend on common metadata:
-
-```python
-motion
-transition
-zoom
-brightness
-contrast
-duration
-start_time
-end_time
-```
-
-Missing metadata could break later processing stages. Safer access patterns such as the following were introduced:
-
+**4. Metadata Mismatch** — pipeline stages depend on shared metadata (`motion`, `transition`, `zoom`, `brightness`, `contrast`, `duration`, `start_time`, `end_time`). Missing fields could break later stages, so safer access patterns were introduced:
 ```python
 item.get("contrast", 1.05)
 ```
 
-## 5. Making Static Images Feel Like Video
+**5. Making Static Images Feel Like Video** — basic image + audio looked like a slideshow. Extended pipeline: `Static Image → Camera Motion → Color Grading → Transitions → Depth Estimation → Parallax → Audio Sync`
 
-A basic image + audio combination looked like a slideshow.
+**6. Image Repetition** — pure random selection repeated visuals too often. The image mixer/scheduler was redesigned to reduce repetition and add variety.
 
-The pipeline was therefore extended with:
+---
+
+## 💡 Engineering Approach
+
+Instead of one large end-to-end model, SoundForge AI uses a **modular pipeline**:
 
 ```text
-Static Image
-     ↓
-Camera Motion
-     ↓
-Color Grading
-     ↓
-Transitions
-     ↓
-Depth Estimation
-     ↓
-Parallax
-     ↓
-Audio Synchronization
+Audio Analysis → Visual Understanding → Image Selection
+→ Scene Planning → Image Processing → Motion → Depth → Video Rendering
 ```
 
-The goal is to move toward a more cinematic visual experience.
-
-## 6. Image Repetition
-
-Pure random selection could produce repetitive visuals.
-
-The image mixer and scheduler were designed to reduce immediate repetition and provide more visual variety.
+This makes each component easier to debug, test, improve, replace, and scale independently.
 
 ---
 
-# 💡 Engineering Approach
+## 📈 Current Development Direction
 
-Instead of building the entire system as one large model, SoundForge AI uses a modular pipeline.
+**✅ Implemented:** audio analysis, beat detection, mood-based categories, curated datasets, image ranking (incl. CLIP-based), image mixing, scene scheduling, camera motion, color grading, transitions, audio/video merging, subtitle processing, thumbnail generation.
 
-```text
-Audio Analysis
-       ↓
-Visual Understanding
-       ↓
-Image Selection
-       ↓
-Scene Planning
-       ↓
-Image Processing
-       ↓
-Motion
-       ↓
-Depth
-       ↓
-Video Rendering
-```
-
-This architecture makes individual components easier to:
-
-- Debug
-- Test
-- Improve
-- Replace
-- Scale
+**🔄 Ongoing:** better depth estimation, more realistic parallax, better beat-synced transitions, improved scene planning and semantic selection, more natural camera movement, better visual continuity.
 
 ---
 
-# 📈 Current Development Direction
+## 🔮 Future Improvements
 
-### Current / Implemented
-
-- Audio analysis
-- Beat detection
-- Mood-based categories
-- Curated image datasets
-- Image ranking
-- CLIP-based semantic ranking
-- Image mixing
-- Scene scheduling
-- Camera motion
-- Color grading
-- Transitions
-- Audio/video merging
-- Subtitle processing
-- Thumbnail generation
-
-### Ongoing Improvements
-
-- Better depth estimation
-- More realistic parallax
-- Better beat-synchronized transitions
-- Improved scene planning
-- Better semantic image selection
-- More natural camera movement
-- Improved visual continuity
-- More cinematic video generation
-
----
-
-# 🔮 Future Improvements
-
-The long-term objective is to move beyond a collection of static images and create more realistic generated video content.
-
-Potential future improvements include:
-
-- AI-generated image sequences
-- AI image-to-video generation
+- AI-generated image sequences / AI image-to-video generation
 - Better depth-aware camera movement
-- Character/object consistency
+- Character/object consistency across scenes
 - Scene-to-scene semantic continuity
 - Automatic shot planning
 - Advanced audio-visual synchronization
-- GPU-optimized inference
+- GPU-optimized inference / cloud-based inference for larger models
 - Higher-quality video generation
-- Cloud-based inference for larger models
 
 ---
 
-# 📂 Generated Data
-
-Generated media is organized into separate storage locations:
-
-```text
-storage/
-└── generated/
-    ├── assets/
-    ├── covers/
-    ├── lyrics/
-    ├── metadata/
-    ├── preview/
-    ├── songs/
-    ├── subtitles/
-    ├── thumbnails/
-    └── videos/
-```
-
-This separation helps manage intermediate files and final outputs.
-
----
-
-# ▶️ Running the Project
-
-### 1. Create a virtual environment
+## ▶️ Running the Project
 
 ```powershell
+# 1. Create a virtual environment
 python -m venv venv
-```
 
-### 2. Activate the environment
+# 2. Activate the environment
+.\venv\Scripts\Activate.ps1
 
-```powershell
-.env\Scripts\Activate.ps1
-```
-
-### 3. Install dependencies
-
-```powershell
+# 3. Install dependencies
 pip install -r requirements.txt
-```
 
-### 4. Start the FastAPI application
-
-```powershell
+# 4. Start the FastAPI application
 python -m uvicorn backend.app.main:app --reload
 ```
 
-The API documentation is available through the FastAPI Swagger interface.
+API documentation is available through the FastAPI Swagger UI once running.
+
+**Recommended minimum hardware:** NVIDIA GPU with 4GB+ VRAM (project developed and tested on RTX 2050 4GB); CPU-only mode works but is significantly slower for depth/parallax stages.
 
 ---
 
-# 🧪 Development Philosophy
+## 📚 What I Learned
 
-The project was developed incrementally rather than attempting to build the complete system at once.
+Working on the video-generation component gave me hands-on experience with Python backend development, FastAPI, audio processing, beat detection, computer vision, CLIP-based semantic matching, AI model integration, depth estimation, video processing, FFmpeg, API integration, pipeline architecture, debugging, and Git/GitHub collaboration.
+
+The biggest lesson: building an AI media-generation system isn't just about the model. Final quality depends heavily on **data preparation, timing, preprocessing, model selection, post-processing, and integration across components.**
+
+---
+
+## 👨‍💻 My Contribution
+
+**Rahul — Video Processing & AI Video Pipeline**
+
+I converted the generated song into a visual video experience by connecting it with a manually curated image dataset through this pipeline:
 
 ```text
-Phase 1
-Project Foundation
-      ↓
-Phase 2
-Image Scheduling
-      ↓
-Phase 3
-Image Ranking
-      ↓
-Phase 4
-Prompt / Semantic Processing
-      ↓
-Audio + Visual Integration
-      ↓
-Motion & Cinematic Effects
-      ↓
-Depth / Parallax
-      ↓
-Video Rendering
+Generated Song → Audio Analysis → Beat/BPM Detection → Mood/Category Info
+→ Image Dataset → Image Ranking → Image Mixing → Scene Scheduling
+→ Camera Motion → Color Grading → Depth/Parallax → Transitions
+→ Video Rendering → Audio Merge → Final Video
 ```
 
-Each stage was tested and improved before moving to the next component.
+Focus: make the output dynamic and cinematic, not a simple sequence of static images.
 
 ---
 
-# 🙏 Acknowledgements
-
-I would like to acknowledge the team members who contributed to different parts of SoundForge AI.
-
-Special thanks to **Fahim** for working on the lyrics and music-generation pipeline and providing the generated songs used as input for the video-generation system.
-
-I also appreciate the collaboration within the team during integration and debugging, where the lyrics, music, backend, and video components needed to work together as a single pipeline.
-
----
-
-# 📚 What I Learned
-
-Working on the video-generation component provided practical experience with:
-
-- Python backend development
-- FastAPI
-- Audio processing
-- Beat detection
-- Computer vision
-- Image processing
-- CLIP-based semantic matching
-- AI model integration
-- Depth estimation
-- Video processing
-- FFmpeg
-- API integration
-- Pipeline architecture
-- Debugging
-- Git/GitHub collaboration
-- Modular software design
-
-One of the most important lessons was that creating an AI media-generation system is not only about using an AI model. Final quality depends heavily on **data preparation, timing, preprocessing, model selection, post-processing, and integration between multiple components**.
-
----
-
-# 👨‍💻 My Contribution
-
-### Rahul — Video Processing & AI Video Pipeline
-
-My contribution focused primarily on converting generated music into a visual video experience.
-
-I worked on the video-processing workflow that connects the generated song with a manually curated image dataset.
-
-The main workflow was:
-
-```text
-Generated Song
-      ↓
-Audio Analysis
-      ↓
-Beat / BPM Detection
-      ↓
-Mood / Category Information
-      ↓
-Image Dataset
-      ↓
-Image Ranking
-      ↓
-Image Mixing
-      ↓
-Scene Scheduling
-      ↓
-Camera Motion
-      ↓
-Color Grading
-      ↓
-Depth / Parallax
-      ↓
-Transitions
-      ↓
-Video Rendering
-      ↓
-Audio Merge
-      ↓
-Final Video
-```
-
-The main focus was to make the output more dynamic and cinematic instead of producing a simple sequence of static images.
-
----
-
-# 📌 Project Status
+## 📌 Project Status
 
 **Status: Active Development**
 
-The current system is a working prototype with an end-to-end pipeline for converting generated songs and curated visual assets into videos.
-
-The visual-generation side is still being improved, particularly around:
-
-- Realistic motion
-- Depth
-- Parallax
-- Scene continuity
-- Beat synchronization
-- Semantic image selection
-- Overall cinematic quality
+Working end-to-end prototype for converting generated songs and curated visual assets into videos. Actively improving: realistic motion, depth, parallax, scene continuity, beat synchronization, semantic image selection, and overall cinematic quality — within the current hardware constraints noted above.
 
 ---
 
-# 📞 Contact
+## 📞 Contact
 
-**Rahul **
+**Rahul** — Data Engineer | ML Engineer
+GitHub: [rahul07-github](https://github.com/rahul07-github)
 
-Data Engineer | ML Engineer
-
-GitHub: `rahul07-github`
-
-For questions, collaboration, or discussion about the project, please feel free to reach out through GitHub.
+For questions, collaboration, or discussion about this project, feel free to reach out through GitHub.
 
 ---
 
-## ⭐ Final Note
-
-SoundForge AI is being developed as a practical exploration of how **text, music, computer vision, AI models, and video processing can be combined into one automated creative pipeline**.
-
-The project is still evolving, and the current implementation focuses on building a reliable foundation that can later support more advanced AI-based video generation.
-
----
-
-## 📌 Repository Description
-
-> **SoundForge AI is a modular text-to-song-to-video generation platform that combines lyrics/music generation, audio analysis, semantic image selection, cinematic motion, depth/parallax effects, and automated video rendering.**
+### Repository Description
+> SoundForge AI is a modular text-to-song-to-video generation platform that combines lyrics/music generation, audio analysis, semantic image selection, cinematic motion, depth/parallax effects, and automated video rendering.
 
 ### Recommended Repository Topics
-
 ```text
-python
-artificial-intelligence
-machine-learning
-computer-vision
-audio-processing
-video-generation
-fastapi
-pytorch
-opencv
-ffmpeg
-clip
-deep-learning
-generative-ai
-music-generation
-ai-video
+python artificial-intelligence machine-learning computer-vision
+audio-processing video-generation fastapi pytorch opencv ffmpeg
+clip deep-learning generative-ai music-generation ai-video
 ```
