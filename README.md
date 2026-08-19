@@ -575,19 +575,6 @@ Pure random selection could produce repetitive visuals.
 
 The image mixer and scheduler were designed to reduce immediate repetition and provide more visual variety.
 
-## 7. Hardware Limitations
-
-The project is developed on a laptop with:
-
-```text
-GPU: NVIDIA RTX 2050
-VRAM: 4 GB
-Storage: 512 GB
-Python: 3.11
-```
-
-Because of limited GPU memory, model size and inference efficiency are important. Large video-generation models can be impractical to run locally, so the current system focuses on lightweight and modular components.
-
 ---
 
 # 💡 Engineering Approach
@@ -856,9 +843,9 @@ The visual-generation side is still being improved, particularly around:
 
 # 📞 Contact
 
-**Rahul**
+**Rahul **
 
-Data Engineer | ML Engineer | Data Analyst
+Data Engineer | ML Engineer
 
 GitHub: `rahul07-github`
 
