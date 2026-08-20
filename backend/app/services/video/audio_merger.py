@@ -1,4 +1,6 @@
 
+import traceback
+
 import ffmpeg
 from pathlib import Path
 
@@ -68,6 +70,7 @@ class AudioMerger:
             return str(output_path)
 
         except Exception as error:
+            traceback.print_exc()
 
             log_error(
                 f"Audio Merge Failed : {error}"

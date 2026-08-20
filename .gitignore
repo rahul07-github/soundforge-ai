@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Python
+echo "venv/" >> .gitignore
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+=======
 # Virtual Environments
 .venv/
 backend/.venv-rvc/
@@ -22,3 +42,4 @@ install_log.txt
 
 # VS Code
 .vscode/
+>>>>>>> origin

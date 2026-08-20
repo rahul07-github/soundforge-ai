@@ -1,4 +1,4 @@
-from app.auth.security import hash_password, verify_password
+from backend.app.auth.security import hash_password, verify_password
 
 password = "mypassword123"
 
